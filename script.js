@@ -59,14 +59,18 @@ function operate(num1, op, num2) {
 // Updating the display
 
 function updateDisplay(value = '0') {
-    if (operator == '') {
-        firstNum = value;
+    if (operator === '') {
+        if (firstNum === '0') {
+            firstNum = value;
+        } else {
+            firstNum += value;
+        }
         document.getElementById('display').textContent = firstNum;
     } else {
         secondNum += value;
         document.getElementById('display').textContent = secondNum;
     }
-} 
+}
 
 updateDisplay();
 
@@ -131,21 +135,46 @@ document.getElementById('decimal').addEventListener('click', function() {
 // Operators
 
 document.getElementById('add').addEventListener('click', function() {
-    operation('+');
+    operator = '+';
 });
 
 document.getElementById('subtract').addEventListener('click', function() {
-    operation('-');
+    operator = '-';
 });
 
 document.getElementById('multiply').addEventListener('click', function() {
-    operation('*');
+    operator = '*';
 });
 
 document.getElementById('divide').addEventListener('click', function() {
-    operation('/');
+    operator = '/';
 });
 
-// Doing the maths
+// Equals
 
+document.getElementById('equals').addEventListener('click', function() {
+    doTheMaths();
+});
+
+// Do the  maths
+
+function doTheMaths() {
+    if (firstNum === '' || operator === '' || secondNum === '') {
+        return;
+    }
     
+    let num1 = parseFloat(firstNum);
+    let num2 = parseFloat(secondNum);
+    
+    let result = operate(num1, operator, num2);
+    
+    firstNum = result.toString();
+    operator = '';
+    secondNum = '';
+    
+    displayResult();
+}
+
+function displayResult() {
+    document.getElementById('display').textContent = firstNum;
+}
