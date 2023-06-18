@@ -52,8 +52,8 @@ button {
 
 #divide,
 #multiply,
-#minus,
-#plus,
+#subtract,
+#add,
 #equals {
     background-color: rgb(206, 122, 5);
 }
