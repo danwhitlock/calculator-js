@@ -1,0 +1,64 @@
+/* GENERAL STYLES */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: rgb(185, 207, 235);
+}
+
+#background {
+    padding: 50px 10px 20px 10px;
+    background-color: rgb(26, 26, 26);
+    border-radius: 10px;
+}
+
+#container {
+    display: grid;
+    width: 350px;
+    height: 500px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 3px;
+    background-color: rgb(26, 26, 26);
+}
+
+#display {
+    background-color: darkgray;
+    grid-column: 1 / 5;
+    text-align: right;
+    font-size: 55px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-family: 'Play', sans-serif;
+}
+
+
+
+/* BUTTON STYLES */
+
+button {
+    font-size: 25px;
+    border-radius: 5px;
+    background-color: rgb(100, 97, 97);
+}
+
+#clear {
+    grid-column: 1 / 4;
+    background-color: rgb(173, 168, 168);
+}
+
+#divide,
+#multiply,
+#minus,
+#plus,
+#equals {
+    background-color: rgb(206, 122, 5);
+}
+
+
+#zero {
+    grid-column: 1 / 3;
+}
