@@ -28,6 +28,9 @@ function multiply (a, b) {
 // Division
 
 function divide (a, b) {
+    if (b === 0) {
+        return 0;
+    }
     let c = a / b;
     return c;
 }
@@ -40,6 +43,7 @@ let firstNum = '';
 let operator = '';
 let secondNum = '';
 let displayValue = '';
+let currentResult = '';
 
 function operate(num1, op, num2) {
     switch (op) {
@@ -72,17 +76,18 @@ function updateDisplay(value = '0') {
     }
 }
 
-updateDisplay();
-
 // Clear function
 
-document.getElementById('clear').addEventListener('click', function() {
+function clearDisplay() {
     firstNum = '';
     operator = '';
     secondNum = '';
+    currentResult = '';
     displayValue = '0';
     document.getElementById('display').textContent = displayValue;
-  });
+  };
+
+  document.getElementById('clear').addEventListener('click', clearDisplay);
 
 // Event listeners for number buttons
 
@@ -135,18 +140,30 @@ document.getElementById('decimal').addEventListener('click', function() {
 // Operators
 
 document.getElementById('add').addEventListener('click', function() {
+    if (operator !== '') {
+        doTheMaths();
+    }
     operator = '+';
 });
 
 document.getElementById('subtract').addEventListener('click', function() {
+    if (operator !== '') {
+        doTheMaths();
+    }
     operator = '-';
 });
 
 document.getElementById('multiply').addEventListener('click', function() {
+    if (operator !== '') {
+        doTheMaths();
+    }
     operator = '*';
 });
 
 document.getElementById('divide').addEventListener('click', function() {
+    if (operator !== '') {
+        doTheMaths();
+    }
     operator = '/';
 });
 
@@ -172,9 +189,12 @@ function doTheMaths() {
     operator = '';
     secondNum = '';
     
+    currentResult = result;
     displayResult();
 }
 
 function displayResult() {
-    document.getElementById('display').textContent = firstNum;
+    document.getElementById('display').textContent = currentResult.toString();
+    secondNum = '';
 }
+
