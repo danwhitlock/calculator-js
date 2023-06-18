@@ -5,7 +5,7 @@ function add (a, b) {
     return c;
 }
 
-console.log(add(5, 5)); // 10
+//console.log(add(5, 5)); // 10
 
 // Subtraction
 
@@ -14,7 +14,7 @@ function subtract (a, b) {
     return c;
 }
 
-console.log(subtract(5, 5)); // 0
+//console.log(subtract(5, 5)); // 0
 
 // Multiplication
 
@@ -23,7 +23,7 @@ function multiply (a, b) {
     return c;
 }
 
-console.log(multiply(5, 5)); // 25
+//console.log(multiply(5, 5)); // 25
 
 // Division
 
@@ -32,17 +32,17 @@ function divide (a, b) {
     return c;
 }
 
-console.log(divide(10, 2)); // 5
+//console.log(divide(10, 2)); // 5
 
 // Operator function to take the operator and two numbers, and call one of the above functions on the numbers
 
 let firstNum = '';
-let operator = '+';
+let operator = '';
 let secondNum = '';
 let displayValue = '';
 
-function operate(num1, operator, num2) {
-    switch (operator) {
+function operate(num1, op, num2) {
+    switch (op) {
         case '+':
           return add(num1, num2);
         case '-':
@@ -54,26 +54,31 @@ function operate(num1, operator, num2) {
       }
 }
 
-let result = operate(firstNum, operator, secondNum);
-
-console.log(result);
+//console.log(result);
 
 // Updating the display
 
-function updateDisplay(value) {
-    displayValue += value;
-    document.getElementById('display').textContent = displayValue;
-
+function updateDisplay(value = '0') {
+    if (operator == '') {
+        firstNum = value;
+        document.getElementById('display').textContent = firstNum;
+    } else {
+        secondNum += value;
+        document.getElementById('display').textContent = secondNum;
+    }
 } 
 
-updateDisplay(535);
+updateDisplay();
 
 // Clear function
 
 document.getElementById('clear').addEventListener('click', function() {
-    displayValue = '';
-    updateDisplay(displayValue);
-});
+    firstNum = '';
+    operator = '';
+    secondNum = '';
+    displayValue = '0';
+    document.getElementById('display').textContent = displayValue;
+  });
 
 // Event listeners for number buttons
 
@@ -143,40 +148,4 @@ document.getElementById('divide').addEventListener('click', function() {
 
 // Doing the maths
 
-function operation (operator) {
-    if (displayValue === '') {
-        return;
-    }
-
-    if (operator !== '' && secondNum !== '') {
-        let result = operate(parseFloat(firstNum), operator, parseFloat(secondNum));
-        updateDisplay(result);
-        firstNum = result.toString();
-        secondNum = '';
-    }
-
-    operator = operator;
-    updateDisplay(operator);
-};
-
-document.getElementById('equals').addEventListener('click', function() {
-    doTheMaths();
-});
-
-function doTheMaths() {
-    if (firstNum === '' || operator === '' || secondNum === '') {
-        return;
-      }
     
-      let num1 = parseFloat(firstNum);
-      let num2 = parseFloat(secondNum);
-    
-      let result = operate(num1, operator, num2);
-    
-      updateDisplay(result.toString());
-    
-      
-      firstNum = result.toString();
-      operator = '';
-      secondNum = '';
-    }
