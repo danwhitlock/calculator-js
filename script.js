@@ -2,7 +2,7 @@
 
 function add (a, b) {
     let c = a + b;
-    return c;
+    return roundDecimals(c);
 }
 
 //console.log(add(5, 5)); // 10
@@ -11,7 +11,7 @@ function add (a, b) {
 
 function subtract (a, b) {
     let c = a - b;
-    return c;
+    return roundDecimals(c);
 }
 
 //console.log(subtract(5, 5)); // 0
@@ -20,7 +20,7 @@ function subtract (a, b) {
 
 function multiply (a, b) {
     let c = a * b;
-    return c;
+    return roundDecimals(c);
 }
 
 //console.log(multiply(5, 5)); // 25
@@ -32,7 +32,11 @@ function divide (a, b) {
         return 0;
     }
     let c = a / b;
-    return c;
+    return roundDecimals(c);
+}
+
+function roundDecimals(num) {
+    return parseFloat(num.toFixed(9));
 }
 
 //console.log(divide(10, 2)); // 5
@@ -64,13 +68,19 @@ function operate(num1, op, num2) {
 
 function updateDisplay(value = '0') {
     if (operator === '') {
-        if (firstNum === '0') {
+        if (firstNum.length >= 10) {
+            return;
+        }
+        if (firstNum === '0' && value !== '.') {
             firstNum = value;
         } else {
             firstNum += value;
         }
         document.getElementById('display').textContent = firstNum;
     } else {
+        if (secondNum.length >= 10) {
+            return;
+        }
         secondNum += value;
         document.getElementById('display').textContent = secondNum;
     }
