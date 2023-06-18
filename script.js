@@ -1,31 +1,23 @@
-// Addition
+// Mathematical functions, ensuring results are limited to 9 decimal places
+
+function roundDecimals(num) {
+    return parseFloat(num.toFixed(9));
+}
 
 function add (a, b) {
     let c = a + b;
     return roundDecimals(c);
 }
 
-//console.log(add(5, 5)); // 10
-
-// Subtraction
-
 function subtract (a, b) {
     let c = a - b;
     return roundDecimals(c);
 }
 
-//console.log(subtract(5, 5)); // 0
-
-// Multiplication
-
 function multiply (a, b) {
     let c = a * b;
     return roundDecimals(c);
 }
-
-//console.log(multiply(5, 5)); // 25
-
-// Division
 
 function divide (a, b) {
     if (b === 0) {
@@ -35,19 +27,15 @@ function divide (a, b) {
     return roundDecimals(c);
 }
 
-function roundDecimals(num) {
-    return parseFloat(num.toFixed(9));
-}
-
-//console.log(divide(10, 2)); // 5
-
-// Operator function to take the operator and two numbers, and call one of the above functions on the numbers
+// Variables to store the data points required
 
 let firstNum = '';
 let operator = '';
 let secondNum = '';
 let displayValue = '';
 let currentResult = '';
+
+// Operator function which determines which operator to perform based upon the user selection
 
 function operate(num1, op, num2) {
     switch (op) {
@@ -62,19 +50,17 @@ function operate(num1, op, num2) {
       }
 }
 
-//console.log(result);
+// Function to update the display with the input & results
 
-// Updating the display
-
-function updateDisplay(value = '0') {
+function updateDisplay(value = '0') { // display is zero to begin with
     if (operator === '') {
-        if (firstNum.length >= 10) {
+        if (firstNum.length >= 10) { // limits input of the number to 10 digits
             return;
         }
-        if (firstNum === '0' && value !== '.') {
+        if (firstNum === '0' && value !== '.') { //ensures decimals display correctly
             firstNum = value;
         } else {
-            firstNum += value;
+            firstNum += value; // concatenates the figures for multi-digit numbers
         }
         document.getElementById('display').textContent = firstNum;
     } else {
@@ -86,10 +72,10 @@ function updateDisplay(value = '0') {
     }
 }
 
-// Clear function
+// Function to clear the results/display
 
 function clearDisplay() {
-    firstNum = '';
+    firstNum = '';  // clear the variables
     operator = '';
     secondNum = '';
     currentResult = '';
@@ -99,7 +85,7 @@ function clearDisplay() {
 
   document.getElementById('clear').addEventListener('click', clearDisplay);
 
-// Event listeners for number buttons
+// Event listeners for Number buttons
 
 document.getElementById('zero').addEventListener('click', function() {
     updateDisplay(0);
@@ -141,16 +127,16 @@ document.getElementById('nine').addEventListener('click', function() {
     updateDisplay(9);
 });
 
-// Decimal
+// Event listener for Decimal button
 
 document.getElementById('decimal').addEventListener('click', function() {
     updateDisplay('.');
 });
 
-// Operators
+// Event listeners for Operator buttons
 
 document.getElementById('add').addEventListener('click', function() {
-    if (operator !== '') {
+    if (operator !== '') { // ensures more than one calculation can be chained
         doTheMaths();
     }
     operator = '+';
@@ -177,25 +163,25 @@ document.getElementById('divide').addEventListener('click', function() {
     operator = '/';
 });
 
-// Equals
+// Event listener for Equals button
 
 document.getElementById('equals').addEventListener('click', function() {
     doTheMaths();
 });
 
-// Do the  maths
+// Function to do the maths and update the result
 
 function doTheMaths() {
     if (firstNum === '' || operator === '' || secondNum === '') {
-        return;
+        return; // Ensures nothing happens if input is missing
     }
     
-    let num1 = parseFloat(firstNum);
+    let num1 = parseFloat(firstNum); // ensures the inputs are treated as numbers
     let num2 = parseFloat(secondNum);
     
     let result = operate(num1, operator, num2);
     
-    firstNum = result.toString();
+    firstNum = result.toString(); // turns back into a string
     operator = '';
     secondNum = '';
     
@@ -205,6 +191,6 @@ function doTheMaths() {
 
 function displayResult() {
     document.getElementById('display').textContent = currentResult.toString();
-    secondNum = '';
+    secondNum = ''; // ensures a new number starts when calculating with more than two numbers
 }
 
